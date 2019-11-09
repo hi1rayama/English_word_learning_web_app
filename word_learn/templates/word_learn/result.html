@@ -1,0 +1,38 @@
+{% extends 'word_learn/base.html' %}
+{% block content %}
+          <h2>問題 </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>英単語</th>
+                  <th>日本語</th>
+                  <th>合否</th>
+                  <th>解答</th>
+                </tr>
+              </thead>
+              {% for key, value in answer.items %}
+              <tbody>
+                <tr>
+                    
+                    {% for word in value%}
+                    <td>{{word}}</td>
+                    {% if forloop.last %}
+                    {% if word == key %}
+                    <td>O</td>
+                    {% else %}
+                    <td>X</td>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    <td>{{key}}</td>
+                  
+                  
+                </tr>
+                {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+           <a class="nav-link" href="{% url 'UserHome' %}">Home</a>
+ {% endblock %} 

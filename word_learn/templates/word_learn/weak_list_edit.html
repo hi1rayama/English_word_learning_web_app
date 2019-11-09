@@ -1,0 +1,38 @@
+{% extends 'word_learn/base.html' %}
+{% block content %}
+          <h2>苦手単語リスト  <a  href="../">戻る</a></h2>
+           <form method="POST" class="post-form">
+           {% csrf_token %}
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>苦手</th>
+                  <th>英単語</th>
+                  <th>日本語</th>
+                </tr>
+              </thead>
+             
+                {% for word in words %}
+                    <tbody>
+                        <tr>
+                            {% if word.weak %}
+                　              <td><input type="checkbox" name="list[]" value="{{ word.id }}" checked="checked"/></td>
+                            {% else %}
+                                <td><input type="checkbox" name="list[]" value="{{ word.id }}" /></td>
+                            {% endif%}
+                                <td>{{word.english_word}}</td>
+                                <td>{{word.japanese_word}}</td>
+                  
+                        </tr>
+                    </tbody>
+                {% endfor %}
+              
+               
+             
+            </table>
+          </div>
+           <button type="submit" class="save btn btn-default" href=''>Save</button>
+           </form>
+ {% endblock %}    
+      

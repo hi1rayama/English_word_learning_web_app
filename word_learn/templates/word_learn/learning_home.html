@@ -1,0 +1,20 @@
+{% extends 'word_learn/base.html' %}
+{% block content %}
+<div class="jumbotron">
+        <p class="lead">
+        <form action="" method="POST">
+        {% csrf_token %}
+        <td><input type="radio" name="range" value="all" checked="checked"/>全単語を出題</td>
+        <td><input type="radio" name="range" value="weak" />苦手リストのみを出題</td>
+         <button a class="btn btn-lg btn-success"  type="submit">始める</button>
+    </form></p>
+   
+      </div>
+{% endblock %}
+
+
+
+
+
+
+

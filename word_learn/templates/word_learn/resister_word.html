@@ -1,0 +1,10 @@
+{% extends 'word_learn/base.html' %}
+{% block content %}
+
+    <h2>単語登録</h2>
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">登録</button>
+    </form>
+ {% endblock %} 

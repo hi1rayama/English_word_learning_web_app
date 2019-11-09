@@ -1,0 +1,25 @@
+{% extends 'word_learn/base.html' %}
+{% block content %}
+<h2>登録単語一覧</h2>
+   <div class="table-responsive">
+     <table class="table table-striped">
+        <thead>
+          <tr>
+             <th>#</th>
+             <th>英単語</th>
+             <th>日本語</th>       
+          </tr>
+       </thead>
+          {% for word in words %}
+            <tbody>
+              <tr>
+                <td>{{word.id}}</td>
+                <td>{{word.english_word}}</td>
+                <td>{{word.japanese_word}}</td>
+              </tr>
+                {% endfor %}
+                </tr>
+           </tbody>
+      </table>
+    </div>
+{% endblock %}

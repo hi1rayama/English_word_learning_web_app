@@ -1,0 +1,25 @@
+{% extends 'word_learn/base.html' %}
+{% block content %}
+          <h2>苦手単語リスト  <a  href="{% url 'WeakListEdit' %}">編集</a></h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>英単語</th>
+                  <th>日本語</th>
+                </tr>
+              </thead>
+              {% for weak in weaks %}
+              <tbody>
+                <tr>
+                  <td>{{weak.id}}</td>
+                  <td>{{weak.english_word}}</td>
+                  <td>{{weak.japanese_word}}</td>
+                </tr>
+                {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+ {% endblock %} 

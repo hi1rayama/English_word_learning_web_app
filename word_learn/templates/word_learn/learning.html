@@ -1,0 +1,29 @@
+{% extends 'word_learn/base.html' %}
+{% block content %}
+          <h2>問題 </h2>
+        <form method="POST" class="post-form" >
+           {% csrf_token %}
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>英単語</th>
+                  <th>日本語</th>
+                  <th>過去の正解率(追加)</th>
+                </tr>
+              </thead>
+              {% for weak in weaks %}
+              <tbody>
+                <tr>
+                  <td>{{weak.english_word}}</td>
+                  <td><input type="text" name="{{weak.id}}" size="25"></td>
+                  <td>100</td>
+                </tr>
+                {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+           <button type="submit" class="save btn btn-default">提出</button>
+           </form>
+ {% endblock %} 
