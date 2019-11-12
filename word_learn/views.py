@@ -57,20 +57,21 @@ class ResisterWordView(View):
 		return render(request, self.template_name, {'form': form})
 
 
-	
-def LearningHome(request):
+class LearningHomeView(View):
 	'''
 	学習サイトのホーム画面
 	'''
-
-	if request.method == "POST":
+	template_name='word_learn/learning_home.html'
+	#get時の処理
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name, {})
+	
+	#post時の処理
+	def post(self, request, *args, **kwargs):
 		radio_value = request.POST.getlist('range')
 		r=radio_value.pop(0)
 		return redirect('Learning',value=r)
 		
-
-	return render(request,'word_learn/learning_home.html',{})
-
 
 
 def Learning(request,value='all',*args,**kwargs):
