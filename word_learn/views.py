@@ -71,13 +71,50 @@ class LearningHomeView(View):
 		radio_value = request.POST.getlist('range')
 		r=radio_value.pop(0)
 		return redirect('Learning',value=r)
-		
 
 
-def Learning(request,value='all',*args,**kwargs):
+
+class LearningView(View):
 	'''
 	苦手英単語一覧
 	'''
+	template_name='word_learn/learning.html'
+	#get時の処理
+	def get(self, request,value='all', *args, **kwargs):
+		if value=='weak':
+			weaks=Word.objects.filter(user=request.user,weak=True)
+		else:
+			weaks=Word.objects.filter(user=request.user)
+
+		return render(request,self.template_name,{'weaks':weaks})
+	
+	#post時の処理
+	def post(self, request,value='all', *args, **kwargs):
+		if value=='weak':
+			weaks=Word.objects.filter(user=request.user,weak=True)
+		else:
+			weaks=Word.objects.filter(user=request.user)
+		ans={}
+		for word in weaks:
+			a=request.POST.get(str(word.id))
+			if len(a)!=0:
+				if word.japanese_word==a:
+					ans.setdefault(str(a), []).append(word.english_word)
+					ans.setdefault(str(a), []).append(word.japanese_word)
+
+				else:
+					ans.setdefault(str(a), []).append(word.english_word)
+					ans.setdefault(str(a), []).append(word.japanese_word)					
+		context = {'answer': ans}
+		return render(request,'word_learn/result.html',context)
+
+
+'''
+関数ベース
+def Learning(request,value='all',*args,**kwargs):
+	
+	#苦手英単語一覧
+	
 	if value=='weak':
 		weaks=Word.objects.filter(user=request.user,weak=True)
 	else:
@@ -101,7 +138,7 @@ def Learning(request,value='all',*args,**kwargs):
 	
 
 	return render(request,'word_learn/learning.html',{'weaks':weaks})
-
+'''
 
 def Result(request,*args,**kwargs):
 	'''
