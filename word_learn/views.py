@@ -140,14 +140,26 @@ def Learning(request,value='all',*args,**kwargs):
 	return render(request,'word_learn/learning.html',{'weaks':weaks})
 '''
 
+class ResultView(View):
+	'''
+	英単語登録画面
+	'''
+	template_name='word_learn/result.html'
+
+	def get(self, request, *args, **kwargs):
+		weaks=kwargs
+		return render(request, self.template_name, {'weaks': weaks})
+
+'''
 def Result(request,*args,**kwargs):
-	'''
+	
 	回答結果
-	'''
+	
 	weaks=kwargs
 
 	return render(request,'word_learn/result.html',{'weaks':weaks})
 
+'''
 
 class WeakListView(ListView):
 	'''
