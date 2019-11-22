@@ -106,7 +106,7 @@ class LearningView(View):
 					ans.setdefault(str(a), []).append(word.english_word)
 					ans.setdefault(str(a), []).append(word.japanese_word)					
 		context = {'answer': ans}
-		return render(request,'word_learn/result.html',context)
+		return render(request,'word_learn/weak_list_edit.html',context)
 
 
 '''
@@ -170,12 +170,36 @@ class WeakListView(ListView):
 	context_object_name = 'weaks'
 	def get_queryset(self):
 		return Word.objects.filter(user=self.request.user,weak=True)
+
+
+class WeakListEditView(View):
+	template_name='word_learn/weak_list_edit.html'
+
+	def get(self, request, *args, **kwargs):
+		words=Word.objects.filter(user=request.user)
+		return render(request, self.template_name, {'words': words})
+
+	def post(self,request, *args,**kwargs):
+		words=Word.objects.filter(user=request.user)
+		checks_value = request.POST.getlist('list[]')
+		lis=[]
+		for w in words:
+			w.weak=False
+			for id in checks_value:
+				if w.id==int(id):
+					w.weak=True
+			lis.append(w)
+		Word.objects.bulk_update(lis, fields=['weak'])
+		return redirect('WeakList')	
+
+
+'''
 		
 
 def WeakListEdit(request,*args,**kwargs):
-	'''
+	
 	苦手単語リストを編集する
-	'''
+	
 	words=Word.objects.filter(user=request.user)
 	checks_value = request.POST.getlist('list[]')
 	print("checks_value = " + str(checks_value))
@@ -191,6 +215,8 @@ def WeakListEdit(request,*args,**kwargs):
 		return redirect('WeakList')
 	return render(request,'word_learn/weak_list_edit.html',{'words':words})	
 
+
+'''
 
 
 #ブログ引用
