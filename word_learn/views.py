@@ -106,7 +106,7 @@ class LearningView(View):
 					ans.setdefault(str(a), []).append(word.english_word)
 					ans.setdefault(str(a), []).append(word.japanese_word)					
 		context = {'answer': ans}
-		return render(request,'word_learn/weak_list_edit.html',context)
+		return render(request,'word_learn/result.html',context)
 
 
 '''

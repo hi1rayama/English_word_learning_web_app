@@ -42,11 +42,14 @@
         <a href="{% url 'logout' %}">ログアウト</a>
       </div>
     </nav>
-        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-          
+       
+        <main class="container" style="padding-top:20px" role="main">
+             
           {% block content %}
             {% endblock %}
+            
         </main>
+          
 
       </div>
     </div>

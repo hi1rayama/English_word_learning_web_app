@@ -4,14 +4,86 @@
 <head>
     <meta charset="utf-8" />
     <title>CREATE</title>
+        <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
+    <link href="https://getbootstrap.com/docs/4.0/examples/narrow-jumbotron/narrow-jumbotron.css" rel="stylesheet">
+ 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <p>新規ユーザーの作成</p>
+<div class="container">
+    <h2>ユーザ登録</h2>
+    <p>ユーザ登録をするにはこちらのフォームをご利用ください。</p>
+    <p>パスワードは４文字以上にして下さい。</p>
+</div>
+ 
+<div class="py-3">
+    <div class="container">
+        <!-- フォーム -->
+        <form action="" method="post">
+ 
+            <!-- ユーザ名 -->
+            <div class="form-group row">
+                <label for="name" class="col-md-3 col-form-label">
+                    ユーザ名
+                </label>
+                <div class="col-md-9">
+                    {% csrf_token %}
+                    {{ form.username }}
+                </div>
+            </div>
+            <!-- /ユーザ名 -->
+ 
+            <!-- パスワード -->
+            <div class="form-group row">
+                <label for="password" class="col-md-3 col-form-label">
+                    パスワード 
+                </label>
+                <div class="col-md-9">
+                    {% csrf_token %}
+                    {{ form.password1 }}
+                </div>
+            </div>
+            <!-- /パスワード -->
+ 
+            <!-- パスワード確認 -->
+            <div class="form-group row">
+                <label for="password2" class="col-md-3 col-form-label">
+                    パスワードの確認
+                </label>
+                <div class="col-md-9">
+                    {% csrf_token %}
+                    {{ form.password2 }}
+                </div>
+            </div>
+            <!-- /パスワード確認 -->
+ 
+            {# エラーメッセージを表示 #}
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                 {% endfor %}
+            {% endif %}
+ 
+            <!-- 確認ボタン -->
+            <div class="form-group row justify-content-end">
+                <div class="col-md-9">
+                    <button type="submit" class="btn btn-primary">登録する</button>
+                </div>
+            </div>
+ 
+        </form>
+        <!-- /フォーム -->
+    </div>
+</div>
+
+</body>
+</html>
+
+<!--    <p>新規ユーザーの作成</p>
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">作成</button>
-    </form>
-</body>
-</html>
+    </form>-->
